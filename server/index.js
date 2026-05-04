@@ -10,6 +10,10 @@ const config = {
 const DAY = 86_400_000;
 const DIFFICULTIES = ["EASY", "MEDIUM", "HARD"];
 
+app.get("/", (_req, res) => {
+  res.json({ ok: true, service: "coding-interview-streak-api" });
+});
+
 function fail(message, status = 502) {
   throw Object.assign(new Error(message), { status });
 }
