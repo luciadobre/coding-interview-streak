@@ -1,7 +1,11 @@
 import "dotenv/config";
 import express from "express";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const app = express();
+const rootDir = path.resolve(fileURLToPath(new URL("..", import.meta.url)));
+const distDir = path.join(rootDir, "dist");
 const config = {
   port: process.env.PORT || 3001,
   stats: process.env.STATS_API_BASE || "https://leetcode-stats.tashif.codes",
@@ -9,10 +13,6 @@ const config = {
 };
 const DAY = 86_400_000;
 const DIFFICULTIES = ["EASY", "MEDIUM", "HARD"];
-
-app.get("/", (_req, res) => {
-  res.json({ ok: true, service: "coding-interview-streak-api" });
-});
 
 function fail(message, status = 502) {
   throw Object.assign(new Error(message), { status });
@@ -241,6 +241,12 @@ app.get("/api/leetcode/summary", async (req, res, next) => {
 app.use((err, _req, res, _next) => {
   const status = Number.isInteger(err.status) ? err.status : 500;
   res.status(status).json({ error: err.message });
+});
+
+app.use(express.static(distDir));
+
+app.get(/.*/, (_req, res) => {
+  res.sendFile(path.join(distDir, "index.html"));
 });
 
 app.listen(config.port, () =>
