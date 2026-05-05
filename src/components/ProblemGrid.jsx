@@ -15,7 +15,7 @@ export default function ProblemGrid({
   openProblem,
   summary,
 }) {
-  const isDone = (problem) => problem.url.length > 0 && done.has(problem.url);
+  const isDone = (problem) => done.has(problem.url);
 
   return (
     <div className="grid gap-3 md:grid-cols-2">

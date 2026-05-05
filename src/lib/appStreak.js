@@ -1,37 +1,52 @@
 import { getCookie, setCookie } from "./cookies.js";
 
-const DAY = 86_400_000;
+const DONE_DAYS_KEY = "app_done_days";
+const DONE_PROBLEMS_KEY = "app_done_problems";
 
-const today = () => new Date().toISOString().slice(0, 10);
+const dateKey = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+const today = () => dateKey(new Date());
+
+const previousDay = (date) => {
+  const previous = new Date(date);
+  previous.setDate(previous.getDate() - 1);
+  return previous;
+};
+
+const readCsvSet = (key) => new Set(getCookie(key).split(",").filter(Boolean));
 
 export function getAppStreak() {
-  const days = new Set(getCookie("app_done_days").split(",").filter(Boolean));
-  let cursor = Date.parse(today());
+  const days = readCsvSet(DONE_DAYS_KEY);
+  let cursor = new Date();
   let count = 0;
 
-  while (days.has(new Date(cursor).toISOString().slice(0, 10))) {
+  while (days.has(dateKey(cursor))) {
     count += 1;
-    cursor -= DAY;
+    cursor = previousDay(cursor);
   }
 
   return count;
 }
 
 export function markAppDone() {
-  const days = new Set(getCookie("app_done_days").split(",").filter(Boolean));
+  const days = readCsvSet(DONE_DAYS_KEY);
   days.add(today());
-  setCookie("app_done_days", [...days].join(","));
-  setCookie("app_streak", getAppStreak());
+  setCookie(DONE_DAYS_KEY, [...days].join(","));
   return getAppStreak();
 }
 
 export function getDoneProblems() {
-  return new Set(getCookie("app_done_problems").split(",").filter(Boolean));
+  return readCsvSet(DONE_PROBLEMS_KEY);
 }
 
 export function markProblemDone(url) {
   const done = getDoneProblems();
   done.add(url);
-  setCookie("app_done_problems", [...done].join(","));
+  setCookie(DONE_PROBLEMS_KEY, [...done].join(","));
   return done;
 }

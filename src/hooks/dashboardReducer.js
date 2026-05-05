@@ -4,26 +4,15 @@ import { emptySummary } from "../lib/leetcode.js";
 
 export const DIFFICULTIES = ["Any", "Easy", "Medium", "Hard"];
 
-const COOKIE_KEYS = {
-  username: "lc_username",
-  difficulty: "lc_difficulty",
-  streak: "lc_streak",
-};
-
-const DEFAULT_VALUES = {
-  difficulty: "Any",
-  streak: "0",
-};
-
 export const getDefaultSummary = () => ({
   ...emptySummary,
-  streak: getCookie(COOKIE_KEYS.streak, DEFAULT_VALUES.streak),
+  streak: getCookie("lc_streak", "0"),
 });
 
 export function createDashboardState() {
   return {
-    username: getCookie(COOKIE_KEYS.username),
-    difficulty: getCookie(COOKIE_KEYS.difficulty, DEFAULT_VALUES.difficulty),
+    username: getCookie("lc_username"),
+    difficulty: getCookie("lc_difficulty", "Any"),
     summary: getDefaultSummary(),
     status: "",
     loading: false,
