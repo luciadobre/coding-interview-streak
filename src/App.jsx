@@ -21,9 +21,6 @@ export default function App() {
         <div className="space-y-7 p-5 md:p-9">
           <header className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
             <div>
-              <p className="text-xs font-semibold uppercase text-accent2">
-                LeetCode dashboard
-              </p>
               <h1 className="mt-2 text-3xl font-black">
                 Coding Interview Streak
               </h1>

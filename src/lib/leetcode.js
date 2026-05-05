@@ -5,6 +5,7 @@ export const emptyProblem = {
   difficulty: "LeetCode",
   url: "",
   date: "",
+  topicTags: [],
 };
 
 export const emptySummary = {
@@ -25,6 +26,7 @@ const problem = (data) => ({
   difficulty: data.difficulty,
   url: data.url,
   date: data.date,
+  topicTags: data.topicTags,
 });
 
 export async function getSummary(username, difficulty) {
@@ -32,7 +34,8 @@ export async function getSummary(username, difficulty) {
 
   const res = await fetch(`/api/leetcode/summary?${params}`);
   const text = await res.text();
-  if (text.length === 0) throw new Error("API returned no response. Is the local server running?");
+  if (text.length === 0)
+    throw new Error("API returned no response. Is the local server running?");
   const data = JSON.parse(text);
 
   if (!res.ok) throw new Error(data.error);
