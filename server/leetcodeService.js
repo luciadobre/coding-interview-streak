@@ -29,6 +29,7 @@ function normalizeProblem(problem) {
     difficulty: problem.difficulty,
     url: `https://leetcode.com/problems/${problem.titleSlug}/`,
     date: "",
+    topicTags: problem.topicTags.map((t) => ({ name: t.name, slug: t.slug })),
   };
 }
 
@@ -39,6 +40,7 @@ function normalizeDailyProblem(daily) {
     difficulty: daily.difficulty,
     url: daily.questionLink,
     date: daily.date,
+    topicTags: daily.topicTags.map((t) => ({ name: t.name, slug: t.slug })),
   };
 }
 
@@ -112,6 +114,7 @@ function getRecapProblem(recentAccepted, difficulty, problemMap) {
   return {
     ...submission,
     difficulty: problem.difficulty,
+    topicTags: problem.topicTags,
   };
 }
 

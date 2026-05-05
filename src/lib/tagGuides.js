@@ -1,0 +1,30 @@
+const LEETCODE = "https://leetcode.com/explore/learn/card/";
+const NEETCODE = "https://neetcode.io/courses/";
+
+export const TAG_GUIDES = {
+  "array":                    LEETCODE + "array-and-string/",
+  "string":                   LEETCODE + "array-and-string/",
+  "hash-table":               LEETCODE + "hash-table/",
+  "linked-list":              LEETCODE + "linked-list/",
+  "binary-search":            LEETCODE + "binary-search/",
+  "stack":                    LEETCODE + "queue-stack/",
+  "queue":                    LEETCODE + "queue-stack/",
+  "tree":                     LEETCODE + "data-structure-tree/",
+  "binary-tree":              LEETCODE + "data-structure-tree/",
+  "binary-search-tree":       LEETCODE + "introduction-to-data-structure-binary-search-tree/",
+  "graph":                    LEETCODE + "graph/",
+  "depth-first-search":       LEETCODE + "graph/",
+  "breadth-first-search":     LEETCODE + "graph/",
+  "dynamic-programming":      LEETCODE + "dynamic-programming/",
+  "heap":                     LEETCODE + "heap/",
+  "priority-queue":           LEETCODE + "heap/",
+  "trie":                     LEETCODE + "trie/",
+  "bit-manipulation":         LEETCODE + "bit-manipulation/",
+  "recursion":                LEETCODE + "recursion-i/",
+  "divide-and-conquer":       LEETCODE + "recursion-ii/",
+  "two-pointers":             NEETCODE + "advanced-algorithms/3",
+  "sliding-window":           NEETCODE + "advanced-algorithms/1",
+  "union-find":               NEETCODE + "advanced-algorithms/7",
+  "backtracking":             NEETCODE + "dsa-for-beginners",
+  "monotonic-stack":          "https://algo.monster/problems/mono_stack_intro",
+};
